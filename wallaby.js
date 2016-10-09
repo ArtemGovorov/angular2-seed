@@ -32,6 +32,10 @@ module.exports = function (wallaby) {
             '**/*.ts': wallaby.compilers.typeScript(compilerOptions)
         },
 
+        env: {
+            kind: 'electron'
+        },
+
         middleware: function (app, express) {
             app.use('/node_modules',
                 express.static(
