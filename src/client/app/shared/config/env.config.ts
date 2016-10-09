@@ -5,5 +5,4 @@ export interface EnvConfig {
   ENV?: string;
 }
 
-export const Config: EnvConfig = JSON.parse('<%= ENV_CONFIG %>');
-
+export const Config: EnvConfig = { };//JSON.parse('<%= ENV_CONFIG %>');
