@@ -1,12 +1,8 @@
 module.exports = function (wallaby) {
 
-    var compilerOptions = require('./tsconfig.json').compilerOptions;
-    compilerOptions.noEmitOnError = false;
-
     return {
         files: [
             { pattern: 'node_modules/core-js/client/shim.min.js', instrument: false },
-            { pattern: 'node_modules/traceur/bin/traceur.js', instrument: false },
             { pattern: 'node_modules/systemjs/dist/system.src.js', instrument: false },
             { pattern: 'node_modules/zone.js/dist/zone.js', instrument: false },
             { pattern: 'node_modules/zone.js/dist/long-stack-trace-zone.js', instrument: false },
@@ -28,10 +24,6 @@ module.exports = function (wallaby) {
             { pattern: 'src/**/*.spec.ts', load: false }
         ],
 
-        compilers: {
-            '**/*.ts': wallaby.compilers.typeScript(compilerOptions)
-        },
-
         env: {
             kind: 'electron'
         },
@@ -51,7 +43,8 @@ module.exports = function (wallaby) {
 
             Promise.all([
                 System.import('@angular/core/testing'),
-                System.import('@angular/platform-browser-dynamic/testing')
+                System.import('@angular/platform-browser-dynamic/testing'),
+                System.import('src/client/app/operators')
             ]).then(function (providers) {
                 var testing = providers[0];
                 var testingBrowser = providers[1];
